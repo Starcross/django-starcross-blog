@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block header %}
+
+    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.init.js"></script>
+    {{ comment_form.media }}
+{% endblock %}
+
+
+{% block content %}
+
+    <h2>{{ blogentry.title }}</h2>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <div>
+        {{ blogentry.entry_text|safe }}
+    </div>
+    {% for comment in blogentry.comment_set.all %}
+        <div>
+            <p><a href="mailto:{{comment.email}}">{{ comment.name }}</a>
+                {{ comment.date_submitted|naturaltime }}</p>
+            <div>{{ comment.comment_text|safe }}</div>
+        </div>
+    {% endfor %}
+    <form method="post" action="/blog/comment">
+        {% csrf_token %}
+        <h3>Add a comment</h3>
+        {{ comment_form.as_p|safe }}
+        <input type="hidden" name="entry" value="{{ blogentry.pk }}">
+        <p><input type="submit"></p>
+    </form>
+
+
+
+{% endblock %}
+</html>
