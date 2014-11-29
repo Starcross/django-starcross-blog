@@ -2,12 +2,8 @@
 {% load humanize %}
 
 {% block header %}
-
-    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.init.js"></script>
     {{ comment_form.media }}
 {% endblock %}
-
 
 {% block content %}
 
@@ -19,7 +15,7 @@
         {{ blogentry.entry_text|safe }}
     </div>
     {% for comment in blogentry.comment_set.all %}
-        <div>
+        <div class="comment">
             <p><a href="mailto:{{comment.email}}">{{ comment.name }}</a>
                 {{ comment.date_submitted|naturaltime }}</p>
             <div>{{ comment.comment_text|safe }}</div>
@@ -36,4 +32,3 @@
 
 
 {% endblock %}
-</html>

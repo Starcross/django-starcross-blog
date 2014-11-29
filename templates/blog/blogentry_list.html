@@ -1,8 +1,7 @@
-
     <h2>Blog</h2>
     <div>
         {% for entry in blogentry_list %}
             <h3><a href="{% url 'blog:blogentry' entry.id %}">{{ entry.title}}</a></h3>
-            <p>{{ entry.entry_text|truncatewords:100|striptags|safe}}</p>
+            <p>{{ entry.entry_text|truncatewords:60|striptags|safe}}</p>
         {% endfor %}
     </div>
