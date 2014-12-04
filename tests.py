@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.test.utils import override_settings
 from django.utils import timezone
 from captcha.conf import settings
 

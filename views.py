@@ -11,6 +11,9 @@ from blog.models import BlogEntry, Comment
 class BlogEntryList(ListView):
     model = BlogEntry
 
+    def get_queryset(self):
+        return BlogEntry.objects.order_by('date_published').reverse()
+
 class BlogEntryView(DetailView):
     model = BlogEntry
 
