@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.forms import ModelForm, HiddenInput
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -33,10 +33,11 @@ class CommentCreateForm(ModelForm):
     captcha = CaptchaField()
     class Meta:
         model = Comment
-        widgets = {'entry' : HiddenInput()}
+        fields = "__all__"
+        widgets = {'entry': HiddenInput()}
     class Media:
         css = {
-            'all' : ('highlight/styles/dark.css',)
+            'all': ('highlight/styles/dark.css',)
         }
         js = ('highlight/highlight.pack.js',)
 

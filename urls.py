@@ -1,12 +1,13 @@
-from django.conf.urls import patterns, url
+from django.urls import path
 
 from blog.views import BlogEntryList, BlogEntryView, CommentCreate
 
-urlpatterns = patterns('',
+app_name = 'blog'
+urlpatterns = [
     # ex: /blog/
-    url(r'^$', BlogEntryList.as_view(template_name='blog/blogentry_all.html'),name='blogentry_list'),
+    path('', BlogEntryList.as_view(template_name='blog/blogentry_all.html'), name='blogentry_list'),
     # ex: /blog/5/
-    url(r'^(?P<pk>\d+)/$', BlogEntryView.as_view(), name='blogentry'),
-    url(r'^comment$', CommentCreate.as_view(), name='comment_form'),
+    path('<int:pk>/', BlogEntryView.as_view(), name='blogentry'),
+    path('comment', CommentCreate.as_view(), name='comment_form')
 
-)
+]
