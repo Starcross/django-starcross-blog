@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load humanize %}
 
+{% block title %}
+    {{ blogentry.title }}
+{% endblock %}
+
 {% block header %}
     {{ comment_form.media }}
 {% endblock %}
