@@ -1,11 +1,16 @@
 from django.db import models
 from django.utils.timezone import now
+from django.template.defaultfilters import slugify
 from tinymce.models import HTMLField
 
 class BlogEntry(models.Model):
     title = models.CharField(max_length=250)
     entry_text = HTMLField()
     date_published = models.DateTimeField(default=now)
+
+    @property
+    def slug(self):
+        return slugify(self.title)
 
     def __str__(self):
         return self.title
