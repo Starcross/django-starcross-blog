@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 from tinymce.models import HTMLField
 
 class BlogEntry(models.Model):
@@ -11,6 +12,9 @@ class BlogEntry(models.Model):
     @property
     def slug(self):
         return slugify(self.title)
+
+    def get_absolute_url(self):
+        return reverse('blog:blogentry', kwargs={'pk': self.pk, 'slug': self.slug})
 
     def __str__(self):
         return self.title
