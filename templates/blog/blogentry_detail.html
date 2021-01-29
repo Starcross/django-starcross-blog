@@ -18,13 +18,19 @@
     <div>
         {{ blogentry.entry_text|safe }}
     </div>
-    {% for comment in blogentry.comment_set.all %}
-        <div class="comment">
-            <p><a href="mailto:{{comment.email}}">{{ comment.name }}</a>
-                {{ comment.date_submitted|naturaltime }}</p>
-            <div>{{ comment.comment_text|safe }}</div>
-        </div>
-    {% endfor %}
+    <div class="comments">
+        {% for comment in blogentry.comment_set.all %}
+            <div class="comment">
+                <div>
+                    <a href="mailto:{{comment.email}}">{{ comment.name }}</a>
+                    {{ comment.date_submitted|naturaltime }}
+                </div>
+                <div>
+                    {{ comment.comment_text|safe }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <form method="post" action="{% url 'blog:comment_form' %}">
         {% csrf_token %}
         <h3>Add a comment</h3>

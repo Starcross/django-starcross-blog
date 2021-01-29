@@ -4,9 +4,14 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from tinymce.models import HTMLField
 
+
 class BlogEntry(models.Model):
     title = models.CharField(max_length=250)
     entry_text = HTMLField()
+    publication_status = models.CharField(max_length=50, choices=[
+        ('draft', 'Draft'),
+        ('published', 'Published')
+    ], default='draft')
     date_published = models.DateTimeField(default=now)
 
     @property
@@ -18,6 +23,9 @@ class BlogEntry(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = "Blog Entries"
 
 
 class Comment(models.Model):
