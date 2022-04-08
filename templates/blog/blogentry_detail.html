@@ -20,7 +20,7 @@
     </div>
     <div class="comments">
         {% for comment in blogentry.comment_set.all %}
-            <div class="comment">
+            <div class="comment" id="comment_{{ comment.pk }}">
                 <div>
                     <a href="mailto:{{comment.email}}">{{ comment.name }}</a>
                     {{ comment.date_submitted|naturaltime }}

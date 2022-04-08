@@ -57,3 +57,8 @@ class CommentCreate(CreateView):
 
     def get_success_url(self):
         return reverse('blog:blogentry', kwargs={'pk': self.object.entry.pk, 'slug': self.object.entry.slug})
+
+
+class CommentList(ListView):
+    model = Comment
+    ordering = ['-date_submitted']

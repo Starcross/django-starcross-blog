@@ -1,6 +1,7 @@
 from django.db import models
-from django.utils.timezone import now
 from django.template.defaultfilters import slugify
+from django.utils.html import strip_tags
+from django.utils.timezone import now
 from django.urls import reverse
 from tinymce.models import HTMLField
 
@@ -36,4 +37,8 @@ class Comment(models.Model):
     comment_text = HTMLField()
 
     def __str__(self):
-        return self.comment_text
+        return strip_tags(self.comment_text[:100])
+
+    def get_absolute_url(self):
+        entry_url = reverse('blog:blogentry', kwargs={'pk': self.entry.pk, 'slug': self.entry.slug})
+        return f"{entry_url}#comment_{self.pk}"

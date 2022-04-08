@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+  <h2>Latest Comments</h2>
+  <div>
+      {% for comment in comment_list %}
+          <div class="comment">
+              <div>
+                  <a href="{{ comment.get_absolute_url }}">
+                    {{ comment.entry.title }}
+                  </a>
+                  {{ comment.name }}
+
+                  {{ comment.date_submitted|naturaltime }}
+              </div>
+              <div>
+                  {{ comment.comment_text|striptags|truncatewords:50 }}
+              </div>
+          </div>
+
+      {% endfor %}
+  </div>
+
+{% endblock %}
+
+
